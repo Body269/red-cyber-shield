@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>Code Shield Academy | الموسوعة التقنية الشاملة</title>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --neon-blue: #007bff;
+            --danger-red: #ff003c;
+            --bg-black: #050505;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg-black);
+            color: #ccc;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow-x: auto;
+            cursor: none;
+            width: 1200px;
+            margin: 0 auto;
+            font-size: 11px;
+        }
+
+        /* شاشة الدخول الاحترافية */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 10000; display: flex; flex-direction: column;
+            justify-content: center; padding-right: 5%;
+            font-family: 'Courier New', monospace; color: var(--neon-green);
+        }
+
+        #matrix-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.12; width: 100vw; height: 100vh; }
+        
+        #cursor-follower {
+            position: fixed; width: 6px; height: 6px;
+            background: var(--neon-blue); border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        header { text-align: center; padding: 30px 20px; border-bottom: 1px solid #1a1a1a; }
+        .glitch {
+            font-size: 3rem; font-weight: bold; color: #fff;
+            text-shadow: 2px 2px var(--danger-red), -2px -2px var(--neon-blue);
+            animation: glitch-anim 2s infinite;
+        }
+
+        .main-content { padding: 25px; }
+
+        .wiki-section {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 5px; padding: 20px; margin-bottom: 25px;
+            backdrop-filter: blur(10px); border-right: 3px solid var(--neon-blue);
+        }
+
+        h2 { font-size: 1.6rem; color: var(--neon-green); margin-bottom: 12px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: var(--neon-blue); font-size: 1.1rem; margin-top: 15px; border-right: 2px solid var(--danger-red); padding-right: 10px; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 10px; }
+        .info-card {
+            background: rgba(0, 0, 0, 0.7); border-radius: 4px;
+            padding: 12px; border-right: 2px solid var(--neon-blue);
+            transition: 0.2s;
+        }
+        .info-card:hover { border-color: #fff; background: rgba(0, 255, 65, 0.03); transform: scale(1.02); }
+        .info-card strong { color: var(--neon-green); display: block; margin-bottom: 5px; font-size: 1rem; }
+        .info-card p { line-height: 1.4; color: #999; margin: 0; }
+
+        .code-snippet {
+            background: #111; color: var(--neon-green); padding: 5px;
+            border-radius: 3px; font-family: monospace; display: block; margin-top: 5px; border: 1px solid #222; font-size: 10px;
+        }
+
+        .tag { background: #000; padding: 3px 8px; border-radius: 3px; border: 1px solid #222; color: var(--neon-blue); font-size: 10px; margin-right: 5px; }
+
+        .tools-announcement {
+            display: block; text-decoration: none; color: white;
+            background: linear-gradient(90deg, #001f3f, #080808);
+            border: 1px solid var(--neon-green);
+            padding: 25px; border-radius: 10px; text-align: center; margin-top: 30px;
+        }
+
+        .footer-container { display: flex; justify-content: space-between; margin-top: 30px; gap: 20px; padding-bottom: 40px; }
+        .cyber-map-section { width: 350px; background: #000; border: 1px solid var(--danger-red); padding: 8px; border-radius: 5px; }
+        .cyber-map-iframe { width: 100%; height: 180px; border: none; }
+
+        @keyframes glitch-anim { 0% { transform: skew(0); } 20% { transform: skew(-1deg); } 100% { transform: skew(0); } }
+    </style>
+</head>
+<body>
+
+    <div id="boot-screen"><div id="boot-text"></div></div>
+    <canvas id="matrix-canvas"></canvas>
+    <div id="cursor-follower"></div>
+
+    <header>
+        <div class="glitch">CODE SHIELD ACADEMY</div>
+        <p style="color: var(--neon-blue); letter-spacing: 3px; font-size: 12px;">THE ULTIMATE CYBER SECURITY & ENGINEERING KNOWLEDGE BASE - 2026 EDITION</p>
+    </header>
+
+    <div class="main-content">
+        
+        <div class="wiki-section">
+            <h2>🛡️ موسوعة الأمن السيبراني: المسار التقني الشامل</h2>
+            <div class="info-grid">
+                <div class="info-card"><strong>• معماريّة الشبكات</strong><p>دراسة طبقات OSI السبع. فهم Packet Crafting و IP Fragmentation. تحليل الـ PCAP عبر Wireshark وتتبع الـ TCP Handshake.</p></div>
+                <div class="info-card"><strong>• ثغرات الويب المتقدمة</strong><p>تشريح ثغرات OWASP؛ دراسة SSRF و Insecure Deserialization. تحليل الـ JWT Tokens وتجاوز الـ CSP والـ CORS واكتشاف الـ IDOR.</p></div>
+                <div class="info-card"><strong>• التشفير والتحليل الرقمي</strong><p>فهم الـ ECC و RSA. تحليل الهاشات المشفرة. دراسة الـ Salting و Pepper في حماية قواعد البيانات وهجمات الـ MITM المشفرة.</p></div>
+                <div class="info-card"><strong>• أمن الأنظمة والخوادم</strong><p>إدارة الـ Active Directory، اختراق أنظمة Windows/Linux، تصعيد الصلاحيات (Privilege Escalation)، والتعامل مع الـ Kernel Exploits.</p></div>
+                <div class="info-card"><strong>• الأمن السحابي (Cloud)</strong><p>تأمين الـ API Endpoints. فحص الـ IAM في AWS و Azure. حماية الـ Docker و Kubernetes ضد هجمات الـ Escape.</p></div>
+                <div class="info-card"><strong>• الاستجابة للحوادث (IR)</strong><p>بناء خطط الـ SOC والـ CSIRT. كيفية التعامل الفوري مع هجمات الـ DDoS الضخمة وحصر الضرر (Containment).</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: #ffaa00;">
+            <h2 style="color: #ffaa00;">⛓️ منهجية الاختراق المنظم (Cyber Kill Chain)</h2>
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color: #ffaa00;"><strong>1. Reconnaissance</strong><p>جمع المعلومات السلبي والإيجابي عن الضحية، تحديد الثغرات في المنافذ والخدمات المفتوحة عبر OSINT.</p></div>
+                <div class="info-card" style="border-right-color: #ffaa00;"><strong>2. Weaponization</strong><p>دمج الـ Payload داخل ملفات شرعية مثل PDF أو Word باستخدام تقنيات الـ Macros المتقدمة.</p></div>
+                <div class="info-card" style="border-right-color: #ffaa00;"><strong>3. Delivery & Exploit</strong><p>إرسال السلاح الرقمي عبر الهندسة الاجتماعية وتفعيل الثغرة داخل الذاكرة (RCE) للوصول الأولي.</p></div>
+                <div class="info-card" style="border-right-color: #ffaa00;"><strong>4. C&C / Actions</strong><p>إنشاء قناة اتصال مشفرة (Command & Control) للبدء بسحب البيانات (Data Exfiltration) أو تدمير الأصول.</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: var(--danger-red);">
+            <h2 style="color: var(--danger-red);">🔴 العمليات الهجومية (Red Team & Black Hat Intelligence)</h2>
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color: var(--danger-red);"><strong>• الريد تيم (Offensive)</strong><p>محاكاة كاملة لدورة حياة الهجوم المتقدم. تجاوز الـ EDR وتشفير الـ Payloads للوصول للـ Domain Controller صامتاً.</p></div>
+                <div class="info-card" style="border-right-color: var(--danger-red);"><strong>• البلاك هات (Dark Side)</strong><p>فهم عقلية المخربين الذين يستخدمون Ransomware والابتزاز الرقمي وبيع قواعد البيانات في منتديات الـ Dark Web.</p></div>
+                <div class="info-card" style="border-right-color: var(--danger-red);"><strong>• الهندسة الاجتماعية</strong><p>التلاعب النفسي بالبشر (Phishing, Vishing, Smishing) للحصول على كلمات المرور والوصول الفيزيائي للمنشآت.</p></div>
+                <div class="info-card" style="border-right-color: var(--danger-red);"><strong>• تجاوز الحماية (Evading)</strong><p>تقنيات الـ Shellcode Injection، وتجاوز الـ Antivirus عبر تقنيات الـ Living off the Land (LoLBins).</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: #9d00ff;">
+            <h2 style="color: #9d00ff;">🛠️ الهاردوير، التحليل الجنائي، وإشارات الراديو</h2>
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color: #9d00ff;"><strong>• Hardware Hacking</strong><p>استخدام الـ Rubber Ducky والـ BadUSB. استنساخ كروت الـ RFID واختراق أجهزة الـ IoT عبر MQTT و JTAG.</p></div>
+                <div class="info-card" style="border-right-color: #9d00ff;"><strong>• Memory Forensics</strong><p>تحليل الـ RAM Dump باستخدام Volatility. البحث عن الـ Code Injection واستخراج كلمات المرور المشفرة من الذاكرة.</p></div>
+                <div class="info-card" style="border-right-color: #9d00ff;"><strong>• Rootkits Detection</strong><p>كشف برمجيات الـ Kernel Mode التي تخفي نفسها عن مديري المهام وتتلاعب بجدول الـ Syscalls.</p></div>
+                <div class="info-card" style="border-right-color: #9d00ff;"><strong>• Signal Intelligence</strong><p>اعتراض إشارات الراديو (SDR) والتحكم في الطائرات المسيرة أو فتح الأبواب الإلكترونية عبر Replay Attack.</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: #00d9ff;">
+            <h2 style="color: #00d9ff;">🛡️ الدفاع المؤسسي والذكاء الاصطناعي (Blue Team & AI)</h2>
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color: #00d9ff;"><strong>• SIEM & SOAR</strong><p>بناء مراكز العمليات الأمنية (SOC). أتمتة الرد على التهديدات باستخدام المراقبة والتحليل الذكي للسجلات.</p></div>
+                <div class="info-card" style="border-right-color: #00d9ff;"><strong>• Zero Trust Architecture</strong><p>تطبيق مبدأ "عدم الثقة المطلقة"، حيث يتم التحقق من الهوية في كل خطوة وصول داخل الشبكة.</p></div>
+                <div class="info-card" style="border-right-color: #00d9ff;"><strong>• AI-Powered Attacks</strong><p>فهم كيف يولد الـ AI أكواد خبيثة متغيرة (Polymorphic Malware) لا يمكن كشفها بالتوقيعات الرقمية التقليدية.</p></div>
+                <div class="info-card" style="border-right-color: #00d9ff;"><strong>• Deepfake Phishing</strong><p>مواجهة هجمات الهندسة الاجتماعية التي تستخدم تزييف الصوت والصورة لانتحال صفة المدراء والموظفين.</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: #ffffff;">
+            <h2 style="color: #ffffff;">🐉 نظام Kali Linux: المختبر الهجومي الأول</h2>
+            <div class="info-grid">
+                <div class="info-card" style="border-right-color: #fff;"><strong>• أساسيات الطرفية</strong><p>إدارة الملفات:<span class="code-snippet">ls -la | cd | mkdir | rm -rf</span> | الصلاحيات:<span class="code-snippet">chmod +x | sudo chown</span></p></div>
+                <div class="info-card" style="border-right-color: #fff;"><strong>• فحص واكتشاف</strong><p>1. Nmap: <span class="code-snippet">nmap -sV [IP]</span> | 2. Nikto: <span class="code-snippet">nikto -h [URL]</span> | 3. Wireshark</p></div>
+                <div class="info-card" style="border-right-color: #fff;"><strong>• استغلال وقوة</strong><p>4. Metasploit: <span class="code-snippet">msfconsole</span> | 5. Burp Suite | 6. SQLmap: <span class="code-snippet">sqlmap -u [URL]</span></p></div>
+                <div class="info-card" style="border-right-color: #fff;"><strong>• كسر وتشفير</strong><p>7. John: <span class="code-snippet">john hash.txt</span> | 8. Hydra | 9. Aircrack-ng | 10. SET</p></div>
+            </div>
+        </div>
+
+        <div class="wiki-section" style="border-right-color: var(--neon-green);">
+            <h2 style="color: var(--neon-green);">💻 هندسة البرمجيات: بناء الأدوات والأسلحة الرقمية</h2>
+            <div class="tech-tags">
+                <div class="tag">Python: الأتمتة والذكاء الاصطناعي</div><div class="tag">C/C++: الـ Rootkits والـ Payloads</div>
+                <div class="tag">Assembly: الهندسة العكسية والـ Shellcode</div><div class="tag">JavaScript: ثغرات الويب والـ Node.js</div>
+                <div class="tag">Rust: برمجة الأنظمة الآمنة</div><div class="tag">Go: أدوات الاختراق المتعددة</div>
+                <div class="tag">SQL: تأمين قواعد البيانات</div><div class="tag">Bash: أتمتة أنظمة اللينكس</div>
+            </div>
+        </div>
+
+        <a href="https://wa.me/201104561536?text=أهلاً%20كود%20شيلد،%20أريد%20الانضمام" target="_blank" class="tools-announcement">
+            <h2 style="color: white; border:none; margin:0; font-size: 1.2rem;">🎁 انضم لرحلة "ما فوق الاحتراف" في Code Shield</h2>
+            <p>سوف تتعلم كل هذه العلوم من الصفر المطلق حتى الاحتراف الميداني الحقيقي مجاناً.</p>
+        </a>
+
+        <div class="footer-container">
+            <div class="academy-info">
+                <h3>أكاديمية Code Shield Academy</h3>
+                <p>المرجع التقني الأول في الشرق الأوسط. نحن نبني جيلاً من الخبراء القادرين على حماية حدودنا الرقمية.</p>
+                <p>© 2026 جميع الحقوق محفوظة للمبادرة.</p>
+            </div>
+            <div class="cyber-map-section">
+                <h2 style="font-size: 10px; color: var(--danger-red); margin-bottom: 5px;">🌍 LIVE THREAT MAP</h2>
+                <iframe src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" class="cyber-map-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bootText = document.getElementById('boot-text');
+        const bootLines = ["System Initialized...", "Loading 3500px Database...", "Restoring Original Content...", "Injecting AI & Hardware Units...", "Compiling Kali Framework...", "Welcome back, Admin. Everything is ready."];
+        let lineIdx = 0;
+        function typeBoot() {
+            if (lineIdx < bootLines.length) {
+                bootText.innerHTML += "> " + bootLines[lineIdx] + "<br>"; lineIdx++; setTimeout(typeBoot, 300);
+            } else {
+                setTimeout(() => { document.getElementById('boot-screen').style.opacity = "0"; setTimeout(() => document.getElementById('boot-screen').style.display = "none", 500); }, 500);
+            }
+        }
+        window.onload = typeBoot;
+
+        const canvas = document.getElementById('matrix-canvas'); const ctx = canvas.getContext('2d');
+        canvas.width = 1200; canvas.height = 3500;
+        const alphabet = "0101CODE-SHIELD-ELITE"; const fontSize = 12;
+        const drops = Array(Math.floor(1200 / fontSize)).fill(1);
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, 1200, 3500);
+            ctx.fillStyle = '#00ff41'; ctx.font = fontSize + 'px monospace';
+            drops.forEach((y, i) => {
+                const text = alphabet[Math.floor(Math.random() * alphabet.length)]; ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > 3500 && Math.random() > 0.975) drops[i] = 0; drops[i]++;
+            });
+        }
+        setInterval(draw, 50);
+
+        const cursor = document.getElementById('cursor-follower');
+        document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+    </script>
+</body>
+</html>
